@@ -20,3 +20,16 @@ after_success:
   - docker push jaderpereiralima/multi-server
   - docker push jaderpereiralima/multi-nginx
   - docker push jaderpereiralima/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: sa-east-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-sa-east-1-878014467885
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
